@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherapp.data.api.models.Day
 import com.example.weatherapp.data.api.models.Location
+import com.example.weatherapp.data.api.models.WeatherResponse
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.domain.repository.Resource
 import com.example.weatherapp.ui.view.adapter.WeatherAdapter
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         weatherViewModel.getWeatherState.observe(this) { result ->
             when (result) {
                 is Resource.Error -> {
-                    Log.e(TAG, result.message.toString())
                     showDialog(ERROR, result.message.toString()) {
                         weatherViewModel.getWeather(KAZAN)
                     }
@@ -55,13 +55,13 @@ class MainActivity : AppCompatActivity() {
 
                 is Resource.Success -> {
                     hideProgress()
-                    Log.d(TAG, SUCCESS)
-                    result.data?.forecast?.forecastDay?.let {
-                        weatherAdapter.updateData(it)
-                        bindDataForSingleDay(it[0].day)
-                        bindLocation(result.data.location)
+                    (result.data as WeatherResponse).apply {
+                        bindLocation(location)
+                        this.forecast.forecastDay.let {
+                            weatherAdapter.updateData(it)
+                            bindDataForSingleDay(it[0].day)
+                        }
                     }
-
                 }
             }
         }

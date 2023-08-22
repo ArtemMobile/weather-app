@@ -7,8 +7,8 @@ import com.example.weatherapp.data.api.ApiConstants.KEY
 import com.example.weatherapp.data.api.ApiConstants.QUERY
 import com.example.weatherapp.data.api.ApiKeys.API_KEY
 import com.example.weatherapp.data.api.models.WeatherResponse
+import retrofit2.Response
 import retrofit2.http.Query
-
 
 interface WeatherApi {
     @GET(END_POINT)
@@ -16,5 +16,5 @@ interface WeatherApi {
         @Query(QUERY) query: String,
         @Query(DAYS) days: String = "5",
         @Query(KEY) apiKey: String = API_KEY
-    ): WeatherResponse
+    ): Response<WeatherResponse>
 }
