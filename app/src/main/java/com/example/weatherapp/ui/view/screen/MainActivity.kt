@@ -2,7 +2,6 @@ package com.example.weatherapp.ui.view.screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +15,6 @@ import com.example.weatherapp.ui.view.adapter.WeatherAdapter
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Constants.ERROR
 import com.example.weatherapp.utils.Constants.KAZAN
-import com.example.weatherapp.utils.Constants.SUCCESS
-import com.example.weatherapp.utils.Constants.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.weatherapp.utils.showDialog
 
@@ -33,11 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         weatherViewModel.getWeather(KAZAN)
         setObservers()
         initAdapter()
         applyRecycler()
+        setContentView(binding.root)
     }
 
     private fun setObservers() {

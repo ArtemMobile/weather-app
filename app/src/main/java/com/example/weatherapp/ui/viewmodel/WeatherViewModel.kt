@@ -1,4 +1,9 @@
 package com.example.weatherapp.ui.viewmodel
+
+import android.app.Application
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,13 +19,14 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(private val weatherRepositoryImplementation: WeatherRepositoryImplementation) :
     ViewModel() {
 
-    private var _getWeatherState: MutableLiveData<Resource<Any>> = MutableLiveData(Resource.Loading())
+    private var _getWeatherState: MutableLiveData<Resource<Any>> =
+        MutableLiveData(Resource.Loading())
     val getWeatherState: MutableLiveData<Resource<Any>> = _getWeatherState
 
-    fun getWeather(query: String){
-        viewModelScope.launch(Dispatchers.IO){
+    fun getWeather(query: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             val response = weatherRepositoryImplementation.getWeatherData(query)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _getWeatherState.value = response
             }
         }
