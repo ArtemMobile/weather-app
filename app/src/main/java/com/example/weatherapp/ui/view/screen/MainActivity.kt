@@ -10,7 +10,7 @@ import com.example.weatherapp.data.api.models.Day
 import com.example.weatherapp.data.api.models.Location
 import com.example.weatherapp.data.api.models.WeatherResponse
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.domain.repository.Resource
+import com.example.weatherapp.utils.Resource
 import com.example.weatherapp.ui.view.adapter.WeatherAdapter
 import com.example.weatherapp.ui.viewmodel.WeatherViewModel
 import com.example.weatherapp.utils.Constants.ERROR
@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         applyRecycler()
         setContentView(binding.root)
     }
+
 
     private fun setObservers() {
         weatherViewModel.getWeatherState.observe(this) { result ->

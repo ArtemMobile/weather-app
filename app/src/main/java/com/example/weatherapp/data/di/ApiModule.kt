@@ -1,7 +1,7 @@
 package com.example.weatherapp.data.di
 
 import com.example.weatherapp.data.api.ApiConstants.BASE_URL
-import com.example.weatherapp.data.api.WeatherApi
+import com.example.weatherapp.data.api.WeatherApiService
 import com.example.weatherapp.data.api.interceptors.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
@@ -13,15 +13,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofitBuilder: Retrofit.Builder): WeatherApi {
-        return retrofitBuilder.build().create(WeatherApi::class.java)
+    fun provideApi(retrofitBuilder: Retrofit.Builder): WeatherApiService {
+        return retrofitBuilder.build().create(WeatherApiService::class.java)
     }
 
     @Provides

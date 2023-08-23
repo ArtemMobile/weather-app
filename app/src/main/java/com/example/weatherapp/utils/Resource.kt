@@ -1,4 +1,4 @@
-package com.example.weatherapp.domain.repository
+package com.example.weatherapp.utils
 
 sealed class Resource<T>(
     val data: T? = null,
